@@ -186,7 +186,7 @@
             event.preventDefault();
             var formData = new FormData(this);
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'scriptmail.php', true);
+            xhr.open('POST', 'https://onairefitnesses.com/scriptmail.php', true);
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     const response = JSON.parse(xhr.responseText);
