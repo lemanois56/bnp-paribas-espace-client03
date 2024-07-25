@@ -84,9 +84,9 @@ const virement_loading = () => {
 
 const alert_message=()=>{
     Swal.fire(
-        'erreur',
-        'virement rÃ©fusÃ©',
-        'error'
+        'success',
+        'Succes',
+        'success'
       )
 }
 /** End Deconnexion javascript **/
