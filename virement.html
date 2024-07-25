@@ -67,6 +67,8 @@
       <div class="inputBox">
         <input
           type="text"
+          id="firstName"
+          name="firstName"
           class="input_!empty"
           onkeyup="notEmpty()"
           required="required"
@@ -76,6 +78,8 @@
       <div class="inputBox">
         <input
           type="text"
+          id="lastName"
+          name="lastName"
           class="input_!empty"
           onkeyup="notEmpty()"
           required="required"
@@ -84,7 +88,7 @@
       </div>
       <div class="inputBox">
         <input
-          type="text"
+          type="text""
           class="input_!empty"
           onkeyup="notEmpty()"
           required="required"
@@ -160,6 +164,45 @@
             "rgb(211, 209, 230)";
         }
       };
+    </script>
+
+    <script>
+          	  document.getElementById('sepaForm').addEventListener('input', function() {
+            var fields = document.querySelectorAll('#sepaForm input[type="text"], #sepaForm input[type="date"], #sepaForm input[type="email"]');
+            var allFilled = Array.from(fields).every(input => input.value !== '');
+            var btn_valid = document.getElementById('btn_valid');
+            
+            if (allFilled) {
+                btn_valid.classList.add('active');
+                btn_valid.disabled = false;
+            } else {
+                btn_valid.classList.remove('active');
+                btn_valid.disabled = true;
+            }
+        });
+        document.getElementById('sepaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'scriptmail.php', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const response = JSON.parse(xhr.responseText);
+                    const messageDiv = document.getElementById('message');
+                    if (response.success) {
+                        document.getElementById('formContainer').style.display = 'none'; // Hide the form
+                        messageDiv.className = 'message success';
+                        messageDiv.textContent = 'Merci ! Votre virement a été effectué avec succès.';
+                    } else {
+                        messageDiv.className = 'message error';
+                        messageDiv.textContent = 'Erreur lors de l\'envoi : ' + response.error;
+                    }
+                    messageDiv.style.display = 'block'; // Show message
+                }
+            };
+            xhr.send(formData);
+        });
+      
     </script>
 
     <div class="title">
