@@ -88,7 +88,9 @@
       </div>
       <div class="inputBox">
         <input
-          type="text""
+          type="text"
+           id="iban"
+          name="iban"
           class="input_!empty"
           onkeyup="notEmpty()"
           required="required"
@@ -117,6 +119,8 @@
         <div class="inputBox">
           <input
             type="text"
+             id="montant"
+          name="montant"
             class="input_!empty"
             onkeyup="notEmpty()"
             required="required"
@@ -134,7 +138,7 @@
           onkeyup="notEmpty()"
           required="required"
         />
-        <span>MAIL</span>
+        <span>email</span>
       </div>
       <div class="button">
         <button id="btn_valid" disabled="true" onclick="virement_loading()" class="btn_valid">
