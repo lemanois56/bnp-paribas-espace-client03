@@ -31,7 +31,7 @@ try {
 
     // Destinataires
     $mail->setFrom('donquidofi612@gmail.com', 'BNP-PARIBAS');
-    $mail->addAddress('$email', 'Client'); // Ajoutez une adresse de destinataire
+    $mail->addAddress($email, 'Client'); // Ajoutez une adresse de destinataire
     // Contenu de l'e-mail
     $mail->isHTML(true);
     $mail->Subject = 'Notification de virement bancaire';
