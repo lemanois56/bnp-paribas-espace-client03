@@ -33,7 +33,7 @@ const resetS = () => {
 /** solde javascript **/
  const alert_block=()=>{
      Swal.fire(
-         'COMPTE BLOQUE',
+         'COMPTE BLOQUÉ',
          'Votre compte est bloqué. Veuillez contacter votre conseiller',
          'warning',
        )
